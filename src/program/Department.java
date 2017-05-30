@@ -7,7 +7,7 @@ public class Department
    private int depCapacity;
    private String depCountry;
    private String depCity;
-   private Events[] events;
+   private Event[] events;
    private Employee[] employees;
    
    public Department(){

@@ -1,6 +1,9 @@
 package program;
 
-public class Events
+import statePattern.EventState;
+import statePattern.StateConstants;
+
+public class Event implements StateConstants
 {
    private String startHour;
    private String endHour;
@@ -8,8 +11,9 @@ public class Events
    private int endDate;
    private String startMonth;
    private String endMonth;
+   private EventState state = WAITING;
    
-   public Events(){
+   public Event(){
       
    }
 
@@ -71,6 +75,18 @@ public class Events
    public void setEndMonth(String endMonth)
    {
       this.endMonth = endMonth;
+   }
+   
+   public void click(){
+      state.click(this);
+   }
+   
+   public void setState(EventState state){
+      this.state = state;
+   }
+   
+   public String status(){
+      return state.status();
    }
    
    
