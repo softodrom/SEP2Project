@@ -134,4 +134,13 @@ public class Department
       }
       return s;
    }
+   
+   public String checkUpcomingEvents(Employee employee){
+      String s = "";
+      for(int i = 0; i < events.length; i++){
+         if(events[i].checkEmployee(employee))
+            s = events[i].getName() + "\n" + s;
+      }
+      return s;
+   }
 }

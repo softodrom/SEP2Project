@@ -14,6 +14,8 @@ public class Event implements StateConstants
    private String startMonth;
    private String endMonth;
    private EventState state = WAITING;
+   private Employee[] employees;
+   private int count;
    
    private int maxCapacityOfEvent;
    
@@ -126,6 +128,38 @@ public class Event implements StateConstants
    public EventState getState()
    {
       return state;
+   }
+   
+   public void addEmployee(Employee employee)
+   {
+      employees[count] = employee;
+      count++;
+   }
+   
+   public String removeEmployee(Employee employeeToDelete)
+   {
+      for (int i = 0; i < count; i++)
+         if (employees[i].getEmployeeID().equals(
+               employeeToDelete.getEmployeeID()))
+         {
+            Employee result = employees[i];
+            for (int j = i; j < employees.length - 1; j++)
+            {
+               employees[j] = employees[j + 1];
+            }
+            count--;
+            return "Employee " + result.getName()
+                  + " is removed from the system";
+         }
+      return "no such ID in database";
+   }
+   
+   public Boolean checkEmployee(Employee employee){
+      for(int i = 0; i < employees.length; i++){
+         if(employees[i].getName().equals(employee.getName()))
+            return true;
+      }
+      return false;
    }
    
    
