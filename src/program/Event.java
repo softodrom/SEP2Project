@@ -5,6 +5,7 @@ import statePattern.StateConstants;
 
 public class Event implements StateConstants
 {
+   private String name;
    private String startHour;
    private String endHour;
    private int startDate;
@@ -87,6 +88,14 @@ public class Event implements StateConstants
    
    public String status(){
       return state.status();
+   }
+   
+   public void setName(String name){
+      this.name = name;
+   }
+   
+   public String getName(){
+      return name;
    }
    
    
