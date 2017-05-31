@@ -5,6 +5,7 @@ import statePattern.StateConstants;
 
 public class Event implements StateConstants
 {
+
    private String name;
    private String startHour;
    private String endHour;
@@ -70,6 +71,61 @@ public class Event implements StateConstants
    
    public String status(){
       return state.status();
+   }
+   
+   public String getName()
+   {
+      return name;
+   }
+
+   public void setName(String name)
+   {
+      this.name = name;
+   }
+
+   public int getMaxCapacityOfEvent()
+   {
+      return maxCapacityOfEvent;
+   }
+
+   public void setMaxCapacityOfEvent(int maxCapacityOfEvent)
+   {
+      this.maxCapacityOfEvent = maxCapacityOfEvent;
+   }
+
+   public String getStartHour()
+   {
+      return startHour;
+   }
+
+   public String getEndHour()
+   {
+      return endHour;
+   }
+
+   public int getStartDate()
+   {
+      return startDate;
+   }
+
+   public int getEndDate()
+   {
+      return endDate;
+   }
+
+   public String getStartMonth()
+   {
+      return startMonth;
+   }
+
+   public String getEndMonth()
+   {
+      return endMonth;
+   }
+
+   public EventState getState()
+   {
+      return state;
    }
    
    
