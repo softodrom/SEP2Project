@@ -13,7 +13,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 
-public class EditDepartmentGUI extends JFrame
+public class AddDepartmentGUI extends JFrame
 {
    private JPanel panel;
    private JPanel depInfo;
@@ -32,13 +32,12 @@ public class EditDepartmentGUI extends JFrame
    private JTextField city;
    private JLabel countryLabel;
    private JTextField country;
-   private JPanel editPanel;
-   private JButton edit;
-   private JButton delete;
+   private JPanel addPanel;
+   private JButton add;
    
-   public EditDepartmentGUI()
+   public AddDepartmentGUI()
    {
-      super("Edit a department");
+      super("Add a department");
       
       panel = new JPanel();
       
@@ -80,23 +79,17 @@ public class EditDepartmentGUI extends JFrame
       countryPanel.add(countryLabel);
       countryPanel.add(country);
       
-      editPanel = new JPanel();
-      editPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
-      edit = new JButton("EDIT");
-      edit.setPreferredSize(new Dimension(80,30));
-      edit.addActionListener(new Close());
-      delete = new JButton("DELETE");
-      delete.addActionListener(new Close1());
-      delete.setPreferredSize(new Dimension(80,30));
-      editPanel.add(edit);
-      editPanel.add(delete);
+      addPanel = new JPanel();
+      add = new JButton("ADD");
+      add.addActionListener(new Close());
+      addPanel.add(add);
       
       depInfo.add(nrPanel);
       depInfo.add(namePanel);
       depInfo.add(capacityPanel);
       depInfo.add(cityPanel);
       depInfo.add(countryPanel);
-      depInfo.add(editPanel);
+      depInfo.add(addPanel);
       
       panel.add(depInfo);
       
@@ -115,17 +108,9 @@ public class EditDepartmentGUI extends JFrame
       }
    }
    
-   public class Close1 implements ActionListener
-   {
-      public void actionPerformed(ActionEvent e)
-      {
-         dispose();
-      }
-   }
-   
    public static void main(String[] args)
    {
-      EditDepartmentGUI addDepartment = new EditDepartmentGUI();
+      AddDepartmentGUI addDepartment = new AddDepartmentGUI();
    }
 
 }

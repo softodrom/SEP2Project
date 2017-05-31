@@ -14,7 +14,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 
-public class EditEventGUI extends JFrame
+public class AddEventGUI extends JFrame
 {
    private JPanel panel;
    private JPanel namePanel;
@@ -43,10 +43,9 @@ public class EditEventGUI extends JFrame
    private JComboBox finishMonth;
    private JComboBox finishHour;
    private JComboBox finishMinute;
-   private JButton edit;
-   private JButton delete;
+   private JButton add;
    
-   public EditEventGUI()
+   public AddEventGUI()
    {
       super("Add a department");
       
@@ -97,15 +96,9 @@ public class EditEventGUI extends JFrame
       finishPanel.add(finishMinute);
       
       buttonsPanel = new JPanel();
-      buttonsPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
-      edit = new JButton("EDIT");
-      edit.addActionListener(new Close());
-      edit.setPreferredSize(new Dimension(80,30));
-      delete = new JButton("DELETE");
-      delete.addActionListener(new Close1());
-      delete.setPreferredSize(new Dimension(80,30));
-      buttonsPanel.add(edit);
-      buttonsPanel.add(delete);
+      add = new JButton("ADD");
+      add.addActionListener(new Close());
+      buttonsPanel.add(add);
       
       
       panel.add(namePanel);
@@ -129,17 +122,9 @@ public class EditEventGUI extends JFrame
       }
    }
    
-   public class Close1 implements ActionListener
-   {
-      public void actionPerformed(ActionEvent e)
-      {
-         dispose();
-      }
-   }
-   
    public static void main(String[] args)
    {
-      EditEventGUI editEvent = new EditEventGUI();
+      AddEventGUI addEvent = new AddEventGUI();
    }
 
 }

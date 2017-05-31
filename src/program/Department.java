@@ -104,8 +104,7 @@ public class Department
    public String removeEvent(Event eventToRemove)
    {
       for (int i = 0; i < countEvents; i++)
-         if (events[i].getName().equals(
-               eventToRemove.getName()))
+         if (events[i].getName().equals(eventToRemove.getName()))
          {
             Event result = events[i];
             for (int j = i; j < events.length - 1; j++)
@@ -113,32 +112,37 @@ public class Department
                events[j] = events[j + 1];
             }
             countEvents--;
-            return "Event " + result.getName()
-                  + " is removed from the system";
+            return "Event " + result.getName() + " is removed from the system";
          }
       return "no such Event in database";
    }
-   
-   public String toStringEmployees(){
+
+   public String toStringEmployees()
+   {
       String s = "";
-      for(int i = 0; i < employees.length ; i++){
-         s = employees[i].getName() + " " + employees[i].getCpr() + "\n" + s; 
+      for (int i = 0; i < employees.length; i++)
+      {
+         s = employees[i].getName() + " " + employees[i].getCpr() + "\n" + s;
       }
       return s;
    }
-   
-   public String toStringEvents(){
+
+   public String toStringEvents()
+   {
       String s = "";
-      for(int i = 0; i < employees.length ; i++){
-         s = events[i].getName() + " " + events[i].getEndDate() + "\n" + s; 
+      for (int i = 0; i < employees.length; i++)
+      {
+         s = events[i].getName() + " " + events[i].getEndDate() + "\n" + s;
       }
       return s;
    }
-   
-   public String checkUpcomingEvents(Employee employee){
+
+   public String checkUpcomingEvents(Employee employee)
+   {
       String s = "";
-      for(int i = 0; i < events.length; i++){
-         if(events[i].checkEmployee(employee))
+      for (int i = 0; i < events.length; i++)
+      {
+         if (events[i].checkEmployee(employee))
             s = events[i].getName() + "\n" + s;
       }
       return s;
