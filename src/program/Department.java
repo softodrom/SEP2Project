@@ -118,4 +118,20 @@ public class Department
          }
       return "no such Event in database";
    }
+   
+   public String toStringEmployees(){
+      String s = "";
+      for(int i = 0; i < employees.length ; i++){
+         s = employees[i].getName() + " " + employees[i].getCpr() + "\n" + s; 
+      }
+      return s;
+   }
+   
+   public String toStringEvents(){
+      String s = "";
+      for(int i = 0; i < employees.length ; i++){
+         s = events[i].getName() + " " + events[i].getEndDate() + "\n" + s; 
+      }
+      return s;
+   }
 }

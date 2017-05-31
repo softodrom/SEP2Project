@@ -14,68 +14,50 @@ public class Event implements StateConstants
    private String endMonth;
    private EventState state = WAITING;
    
+   private int maxCapacityOfEvent;
+   
    public Event(){
-      
+      name = "Simple Event";
    }
-
-   public String getStartHour()
-   {
-      return startHour;
+   
+   public Event(String name){
+      this.name = name;
    }
-
-   public void setStartHour(String startHour)
-   {
+   
+   public Event setStartHour(String startHour){
       this.startHour = startHour;
+      return this;
    }
-
-   public String getEndHour()
-   {
-      return endHour;
-   }
-
-   public void setEndHour(String endHour)
-   {
+   
+   public Event setEndHour(String endHour){
       this.endHour = endHour;
+      return this;
    }
-
-   public int getStartDate()
-   {
-      return startDate;
-   }
-
-   public void setStartDate(int startDate)
-   {
+   
+   public Event setStartDate(int startDate){
       this.startDate = startDate;
+      return this;
    }
-
-   public int getEndDate()
-   {
-      return endDate;
-   }
-
-   public void setEndDate(int endDate)
-   {
+   
+   public Event setEndDate(int endDate){
       this.endDate = endDate;
+      return this;
    }
-
-   public String getStartMonth()
-   {
-      return startMonth;
-   }
-
-   public void setStartMonth(String startMonth)
-   {
+   
+   public Event setStartMonth(String startMonth){
       this.startMonth = startMonth;
+      return this;
    }
-
-   public String getEndMonth()
-   {
-      return endMonth;
-   }
-
-   public void setEndMonth(String endMonth)
-   {
+   
+   public Event setEndMonth(String endMonth){
       this.endMonth = endMonth;
+      return this;
+   }
+   
+   public Event build(){
+      if(maxCapacityOfEvent == 0)
+         maxCapacityOfEvent = 100;
+      return this;
    }
    
    public void click(){
@@ -88,14 +70,6 @@ public class Event implements StateConstants
    
    public String status(){
       return state.status();
-   }
-   
-   public void setName(String name){
-      this.name = name;
-   }
-   
-   public String getName(){
-      return name;
    }
    
    
