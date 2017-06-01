@@ -116,13 +116,17 @@ public class Department
          }
       return "no such Event in database";
    }
+   
+   public Employee getEmployee(int i){
+      return employees[i];
+   }
 
    public String toStringEmployees()
    {
       String s = "";
       for (int i = 0; i < employees.length; i++)
       {
-         s = employees[i].getName() + " " + employees[i].getCpr() + "\n" + s;
+         //s = "{"+employees.getCPR()+","+employees.getUsername()+","+employees.getName()+","+employees.getBirthDate()+"/"+employees.getBirthMonth()+"/"+employees.getBirthYear()+","+employees.getEmail()+","+employees.getDepartment()+","+employees.getRole()+","+employees.getWages()+"}";
       }
       return s;
    }

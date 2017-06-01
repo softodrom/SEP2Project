@@ -1,4 +1,5 @@
-package gui;
+package GUI;
+
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -9,6 +10,8 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+
+import program.Employee;
 
 
 public class SearchEmployee extends JFrame
@@ -38,7 +41,7 @@ public class SearchEmployee extends JFrame
       
       searchPanel = new JPanel();
       search = new JButton("SEARCH");
-      search.addActionListener(new Close());
+      search.addActionListener(new Search());
       searchPanel.add(search);
       
       panel.add(centre);
@@ -51,10 +54,12 @@ public class SearchEmployee extends JFrame
       setResizable(false);
    }
    
-   public class Close implements ActionListener
+   public class Search implements ActionListener
    {
       public void actionPerformed(ActionEvent e)
       {
+         Employee emp = new Employee();
+         //emp.searchEmployee();
          dispose();
       }
    }

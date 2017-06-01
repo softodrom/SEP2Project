@@ -7,15 +7,18 @@ public class Event implements StateConstants
 {
 
    private String name;
-   private String startHour;
-   private String endHour;
+   private int startHour;
+   private int endHour;
+   private int startMinute;
+   private int endMinute;
    private int startDate;
    private int endDate;
-   private String startMonth;
-   private String endMonth;
+   private int startMonth;
+   private int endMonth;
    private EventState state = WAITING;
    private Employee[] employees;
    private int count;
+   private String department;
 
    private int maxCapacityOfEvent;
 
@@ -28,16 +31,34 @@ public class Event implements StateConstants
    {
       this.name = name;
    }
+   
+   public Event setDepartment(String department)
+   {
+      this.department=department;
+      return this;
+   }
 
-   public Event setStartHour(String startHour)
+   public Event setStartHour(int startHour)
    {
       this.startHour = startHour;
       return this;
    }
-
-   public Event setEndHour(String endHour)
+   
+   public Event setStartMinute(int startMinute)
    {
-      this.endHour = endHour;
+      this.startMinute = startMinute;
+      return this;
+   }
+   
+   public Event setEndHour(int endHour)
+   {
+      this.endHour=endHour;
+      return this;
+   }
+
+   public Event setEndMinute(int endMinute)
+   {
+      this.endMinute = endMinute;
       return this;
    }
 
@@ -53,13 +74,13 @@ public class Event implements StateConstants
       return this;
    }
 
-   public Event setStartMonth(String startMonth)
+   public Event setStartMonth(int startMonth)
    {
       this.startMonth = startMonth;
       return this;
    }
 
-   public Event setEndMonth(String endMonth)
+   public Event setEndMonth(int endMonth)
    {
       this.endMonth = endMonth;
       return this;
@@ -107,12 +128,12 @@ public class Event implements StateConstants
       this.maxCapacityOfEvent = maxCapacityOfEvent;
    }
 
-   public String getStartHour()
+   public int getStartHour()
    {
       return startHour;
    }
 
-   public String getEndHour()
+   public int getEndHour()
    {
       return endHour;
    }
@@ -127,12 +148,12 @@ public class Event implements StateConstants
       return endDate;
    }
 
-   public String getStartMonth()
+   public int getStartMonth()
    {
       return startMonth;
    }
 
-   public String getEndMonth()
+   public int getEndMonth()
    {
       return endMonth;
    }
@@ -174,6 +195,12 @@ public class Event implements StateConstants
             return true;
       }
       return false;
+   }
+   
+   
+   public String getDepartment()
+   {
+      return department;
    }
 
 }

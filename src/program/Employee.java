@@ -1,17 +1,21 @@
 package program;
 
-public class Employee
+import java.io.Serializable;
+
+public class Employee implements Serializable
 {
    private String name;
    private String cpr;
+   private String password;
    private int birthYear;
    private int birthDate;
-   private String birthMonth;
+   private int birthMonth;
    private String employeeID;
    private String userName;
    private String email;
    private String role;
-   private String wages;
+   private int wages;
+   private String department;
    
    public Employee(){
       
@@ -36,6 +40,16 @@ public class Employee
    {
       this.cpr = cpr;
    }
+   
+   public void setPassword(String password)
+   {
+      this.password = password;
+   }
+   
+   public String getPassword()
+   {
+      return password;
+   }
 
    public int getBirthYear()
    {
@@ -57,12 +71,12 @@ public class Employee
       this.birthDate = birthDate;
    }
 
-   public String getBirthMonth()
+   public int getBirthMonth()
    {
       return birthMonth;
    }
 
-   public void setBirthMonth(String birthMonth)
+   public void setBirthMonth(int birthMonth)
    {
       this.birthMonth = birthMonth;
    }
@@ -107,15 +121,24 @@ public class Employee
       this.role = role;
    }
 
-   public String getWages()
+   public int getWages()
    {
       return wages;
    }
 
-   public void setWages(String wages)
+   public void setWages(int wages)
    {
       this.wages = wages;
    }
    
+   public void setDepartment(String department)
+   {
+      this.department=department;
+   }
+   
+   public String getDepartment()
+   {
+      return department;
+   }
    
 }
