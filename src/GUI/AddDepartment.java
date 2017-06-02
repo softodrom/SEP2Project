@@ -1,6 +1,5 @@
-package gui;
-import java.awt.BorderLayout;
-import java.awt.Dimension;
+package GUI;
+
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -12,8 +11,10 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import program.Department;
 
-public class AddDepartmentGUI extends JFrame
+
+public class AddDepartment extends JFrame
 {
    private JPanel panel;
    private JPanel depInfo;
@@ -35,7 +36,7 @@ public class AddDepartmentGUI extends JFrame
    private JPanel addPanel;
    private JButton add;
    
-   public AddDepartmentGUI()
+   public AddDepartment()
    {
       super("Add a department");
       
@@ -81,7 +82,7 @@ public class AddDepartmentGUI extends JFrame
       
       addPanel = new JPanel();
       add = new JButton("ADD");
-      add.addActionListener(new Close());
+      add.addActionListener(new Add());
       addPanel.add(add);
       
       depInfo.add(nrPanel);
@@ -100,17 +101,26 @@ public class AddDepartmentGUI extends JFrame
       setResizable(false);
    }
    
-   public class Close implements ActionListener
+   public class Add implements ActionListener
    {
       public void actionPerformed(ActionEvent e)
       {
+         Department dep = new Department(Integer.parseInt(capacity.getText()));
+         int nrText = Integer.parseInt(nr.getText());
+         dep.setDepNumber(nrText);
+         String nameText = name.getText();
+         dep.setDepName(nameText);
+         String cityText = city.getText();
+         dep.setDepCity(cityText);
+         String countryText = country.getText();
+         dep.setDepCountry(countryText);
          dispose();
       }
    }
    
    public static void main(String[] args)
    {
-      AddDepartmentGUI addDepartment = new AddDepartmentGUI();
+      AddDepartment addDepartment = new AddDepartment();
    }
 
 }

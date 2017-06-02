@@ -1,4 +1,5 @@
-package gui;
+package GUI;
+
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -12,7 +13,7 @@ import javax.swing.JTextField;
 
 
 
-public class SearchEventGUI extends JFrame
+public class SearchEvent extends JFrame
 {
    private JPanel panel;
    private JPanel centre;
@@ -22,7 +23,7 @@ public class SearchEventGUI extends JFrame
    private JPanel searchPanel;
    private JButton search;
 
-   public SearchEventGUI()
+   public SearchEvent()
    {
        super("Search an event");
        
@@ -62,7 +63,7 @@ public class SearchEventGUI extends JFrame
    
    public static void main(String[] args)
    {
-      SearchEventGUI searchEvent = new SearchEventGUI();
+      SearchEvent searchEvent = new SearchEvent();
    }
 
 }

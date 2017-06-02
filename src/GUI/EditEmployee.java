@@ -1,5 +1,5 @@
-package gui;
-import java.awt.BorderLayout;
+package GUI;
+
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
@@ -7,18 +7,18 @@ import java.awt.event.ActionListener;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
-import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import program.Employee;
 
-public class AddEmployeeGUI extends JFrame
+
+public class EditEmployee extends JFrame
 {
    private JPanel panel;
    private JPanel main;
-   private JPanel south;
    private JPanel cprPanel;
    private JPanel namePanel;
    private JPanel usernamePanel;
@@ -26,8 +26,7 @@ public class AddEmployeeGUI extends JFrame
    private JPanel positionPanel;
    private JPanel departmentPanel;
    private JPanel wagesPanel;
-   private JPanel addPanel;
-   private JPanel birthdayPanel;
+   private JPanel editPanel;
    
    private JLabel cprLabel;
    private JLabel nameLabel;
@@ -36,9 +35,6 @@ public class AddEmployeeGUI extends JFrame
    private JLabel positionLabel;
    private JLabel departmentLabel;
    private JLabel wagesLabel;
-   private JLabel birthdayLabel;
-   private JLabel slash1;
-   private JLabel slash2;
    
    private JTextField cpr;
    private JTextField name;
@@ -47,15 +43,25 @@ public class AddEmployeeGUI extends JFrame
    private JTextField position;
    private JTextField department;
    private JTextField wages;
+   
+   private JButton edit;
+   private JButton delete;
+   
+   private JLabel space;
+   private JPanel birthdayPanel;
+   private JLabel birthdayLabel;
    private JTextField day;
+   private JLabel slash1;
    private JTextField month;
+   private JLabel slash2;
    private JTextField year;
+   private JPanel passwordPanel;
+   private JLabel passwordLabel;
+   private JTextField password;
    
-   private JButton add;
-   
-   public AddEmployeeGUI()
+   public EditEmployee()
    {
-      super("Add an employee");
+      super("Edit the employee");
       
       panel = new JPanel();
       
@@ -114,7 +120,7 @@ public class AddEmployeeGUI extends JFrame
       
       positionPanel = new JPanel();
       positionPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
-      positionLabel = new JLabel("Role              ");
+      positionLabel = new JLabel("Position       ");
       position = new JTextField(10);
       positionPanel.add(positionLabel);
       positionPanel.add(position);
@@ -126,11 +132,25 @@ public class AddEmployeeGUI extends JFrame
       wagesPanel.add(wagesLabel);
       wagesPanel.add(wages);
       
-      addPanel = new JPanel();
-      add = new JButton("ADD");
-      add.setPreferredSize(new Dimension(80,30));
-      add.addActionListener(new Close());
-      addPanel.add(add);
+      passwordPanel = new JPanel();
+      passwordPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
+      passwordLabel = new JLabel("Password   ");
+      password = new JTextField(10);
+      passwordPanel.add(passwordLabel);
+      passwordPanel.add(password);
+      
+      editPanel = new JPanel();
+      editPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
+      space = new JLabel("  ");
+      edit = new JButton("EDIT");
+      edit.setPreferredSize(new Dimension(80,30));
+      edit.addActionListener(new Add());
+      delete = new JButton("DELETE");
+      delete.setPreferredSize(new Dimension(80,30));
+      delete.addActionListener(new Delete());
+      editPanel.add(space);
+      editPanel.add(edit);
+      editPanel.add(delete);
       
       main.add(cprPanel);
       main.add(usernamePanel);
@@ -140,19 +160,49 @@ public class AddEmployeeGUI extends JFrame
       main.add(departmentPanel);
       main.add(positionPanel);
       main.add(wagesPanel);
-      main.add(addPanel);
+      main.add(passwordPanel);
+      main.add(editPanel);
       
       
       panel.add(main);
       
       add(panel);
-      setSize(230,320);
+      setSize(230,350);
       setVisible(true);
       setLocationRelativeTo(null);
       setResizable(false);
    }
    
-   public class Close implements ActionListener
+   public class Add implements ActionListener
+   {
+      public void actionPerformed(ActionEvent e)
+      {
+         Employee emp = new Employee();
+         String cprText = cpr.getText();
+         emp.setCpr(cprText);
+         String usernameText = username.getText();
+         emp.setUserName(usernameText);
+         String nameText = name.getText();
+         emp.setName(nameText);
+         int dayText = Integer.parseInt(day.getText());
+         emp.setBirthDate(dayText);
+         int monthText = Integer.parseInt(month.getText());
+         emp.setBirthMonth(monthText);
+         int yearText = Integer.parseInt(year.getText());
+         emp.setBirthYear(yearText);
+         String emailText = email.getText();
+         emp.setEmail(emailText);
+         String departmentText = department.getText();
+         emp.setDepartment(departmentText);
+         String roleText = position.getText();
+         emp.setRole(roleText);
+         String wagesText = wages.getText();
+         emp.setWages(Integer.parseInt(wagesText));
+         dispose();
+      }
+   }
+   
+   public class Delete implements ActionListener
    {
       public void actionPerformed(ActionEvent e)
       {
@@ -162,7 +212,7 @@ public class AddEmployeeGUI extends JFrame
    
    public static void main(String[] args)
    {
-      AddEmployeeGUI addEmployee = new AddEmployeeGUI();
+      EditEmployee addEmployee = new EditEmployee();
    }
 
 }

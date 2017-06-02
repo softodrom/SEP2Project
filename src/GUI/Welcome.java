@@ -1,4 +1,5 @@
-package gui;
+package GUI;
+
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
@@ -12,16 +13,11 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 
-public class WelcomeGUI extends JFrame
+public class Welcome extends JFrame
 {
    private JPanel north;
    private JPanel center;
-   private JPanel south;
-   
-   private JPanel mainLeft;
    private JPanel mainCenter;
-   private JPanel mainRight;
-   
    private JPanel employees;
    private JPanel offices;
    private JPanel events;
@@ -33,9 +29,13 @@ public class WelcomeGUI extends JFrame
    private JButton officesButton;
    private JButton eventsButton;
    
-   public WelcomeGUI()
+   private Controller controller;
+   
+   public Welcome(Controller controller)
    {
       super("WGYM BANK");
+      
+      this.controller = controller;
       
       //logo
       north = new JPanel();
@@ -71,13 +71,11 @@ public class WelcomeGUI extends JFrame
       mainCenter.add(events);
       center.add(mainCenter);
       
-      
       add(north, BorderLayout.NORTH);
       add(center, BorderLayout.CENTER);
       setSize(1000,700);
       setVisible(true);
       setLocationRelativeTo(null);
-      setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
       setResizable(false);
    }
    
@@ -86,7 +84,7 @@ public class WelcomeGUI extends JFrame
    {
       public void actionPerformed(ActionEvent e)
       {
-         EmployeesGUI employees = new EmployeesGUI();
+         Employees employees = new Employees(controller);
          dispose();
       }
    }
@@ -95,7 +93,7 @@ public class WelcomeGUI extends JFrame
    {
       public void actionPerformed(ActionEvent e)
       {
-         DepartmentsGUI officePage = new DepartmentsGUI();
+         Departments officePage = new Departments(controller);
          dispose();
       }
    }
@@ -104,14 +102,9 @@ public class WelcomeGUI extends JFrame
    {
       public void actionPerformed(ActionEvent e)
       {
-         EventsGUI eventPage = new EventsGUI();
+         Events eventPage = new Events(controller);
          dispose();
       }
-   }
-   
-   public static void main(String[] args)
-   {
-      WelcomeGUI welcomePage = new WelcomeGUI();
    }
 
 }

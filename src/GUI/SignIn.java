@@ -1,32 +1,35 @@
-package gui;
+package GUI;
+
 import java.awt.BorderLayout;
-import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.net.Socket;
 
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 
-public class SignInGUI extends JFrame
+public class SignIn extends JFrame
 {
    private JPanel north;
    private JPanel center;
    private JPanel south;
    
-   private JPanel mainLeft;
    private JPanel mainCenter;
-   private JPanel mainRight;
-   
    private ImageIcon icon;
+   private ImageIcon icon2;
    private JLabel iconLabel;
+   private JLabel iconLabel2;
    
    private JPanel usernamePanel;
    private JPanel passwordPanel;
@@ -39,10 +42,13 @@ public class SignInGUI extends JFrame
    
    private JButton signIn;
    
+   private Controller controller;
    
-   public SignInGUI()
+   public SignIn(Controller controller)
    {
       super("WGYM BANK");
+      
+      this.controller = controller;
       
       //logo
       north = new JPanel();
@@ -79,10 +85,14 @@ public class SignInGUI extends JFrame
       mainCenter.add(signInPanel);
       center.add(mainCenter);
       
-      
+      south = new JPanel();
+      icon2 = new ImageIcon("money.png");
+      iconLabel2 = new JLabel(icon2);
+      south.add(iconLabel2);
       
       add(north, BorderLayout.NORTH);
       add(center, BorderLayout.CENTER);
+      add(south, BorderLayout.SOUTH);
       setSize(1000,700);
       setVisible(true);
       setLocationRelativeTo(null);
@@ -94,14 +104,23 @@ public class SignInGUI extends JFrame
    {
       public void actionPerformed(ActionEvent e)
       {
-         WelcomeGUI welcome = new WelcomeGUI();
-         dispose();
+         String usernameText = username.getText();
+         String passwordText = password.getText();
+         
+         if (!controller.existentUser(usernameText)) {
+
+            JOptionPane.showMessageDialog(null, "The username or password is incorrect. Try again!", "Error", JOptionPane.ERROR_MESSAGE);
+            
+         } else
+         if (controller.getUserPassword(usernameText).equals(passwordText))
+         {
+            Welcome welcome = new Welcome(controller);       
+         }
+         else
+         {
+            JOptionPane.showMessageDialog(null, "The username or password is incorrect. Try again!", "Error", JOptionPane.ERROR_MESSAGE);
+         }
       }
-   }
-   
-   public static void main(String[] args)
-   {
-      SignInGUI signInPage = new SignInGUI();
    }
 
 }

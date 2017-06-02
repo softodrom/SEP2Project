@@ -1,5 +1,5 @@
-package gui;
-import java.awt.BorderLayout;
+package GUI;
+
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
@@ -9,15 +9,18 @@ import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import program.Department;
+import program.Employee;
 
-public class EditEmployeeGUI extends JFrame
+
+public class AddEmployee extends JFrame
 {
    private JPanel panel;
    private JPanel main;
-   private JPanel south;
    private JPanel cprPanel;
    private JPanel namePanel;
    private JPanel usernamePanel;
@@ -25,7 +28,8 @@ public class EditEmployeeGUI extends JFrame
    private JPanel positionPanel;
    private JPanel departmentPanel;
    private JPanel wagesPanel;
-   private JPanel editPanel;
+   private JPanel addPanel;
+   private JPanel birthdayPanel;
    
    private JLabel cprLabel;
    private JLabel nameLabel;
@@ -34,6 +38,9 @@ public class EditEmployeeGUI extends JFrame
    private JLabel positionLabel;
    private JLabel departmentLabel;
    private JLabel wagesLabel;
+   private JLabel birthdayLabel;
+   private JLabel slash1;
+   private JLabel slash2;
    
    private JTextField cpr;
    private JTextField name;
@@ -42,15 +49,29 @@ public class EditEmployeeGUI extends JFrame
    private JTextField position;
    private JTextField department;
    private JTextField wages;
+   private JTextField day;
+   private JTextField month;
+   private JTextField year;
    
-   private JButton edit;
-   private JButton delete;
+   private JButton add;
+   private JPanel passwordPanel;
+   private JTextField password;
+   private JLabel passwordLabel;
    
-   private JLabel space;
+   //IMPORTANT LINE, DON'T FORGET ABOUT IT ;)
    
-   public EditEmployeeGUI()
+   private Controller controller;
+   
+   //IMPORTANT LINE, DON'T FORGET ABOUT IT ;)
+   
+   public AddEmployee(Controller controller)
    {
       super("Add an employee");
+      
+      //IMPORTANT LINE, DON'T FORGET ABOUT IT ;)
+      
+      this.controller = controller;
+      //IMPORTANT LINE, DON'T FORGET ABOUT IT ;)
       
       panel = new JPanel();
       
@@ -78,6 +99,21 @@ public class EditEmployeeGUI extends JFrame
       usernamePanel.add(usernameLabel);
       usernamePanel.add(username);
       
+      birthdayPanel = new JPanel();
+      birthdayPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
+      birthdayLabel = new JLabel("Birthday       ");
+      day = new JTextField(2);
+      slash1 = new JLabel("/");
+      month = new JTextField(2);
+      slash2 = new JLabel("/");
+      year = new JTextField(3);
+      birthdayPanel.add(birthdayLabel);
+      birthdayPanel.add(day);
+      birthdayPanel.add(slash1);
+      birthdayPanel.add(month);
+      birthdayPanel.add(slash2);
+      birthdayPanel.add(year);
+      
       emailPanel = new JPanel();
       emailPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
       emailLabel = new JLabel("Email            ");
@@ -94,7 +130,7 @@ public class EditEmployeeGUI extends JFrame
       
       positionPanel = new JPanel();
       positionPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
-      positionLabel = new JLabel("Position       ");
+      positionLabel = new JLabel("Role              ");
       position = new JTextField(10);
       positionPanel.add(positionLabel);
       positionPanel.add(position);
@@ -106,57 +142,76 @@ public class EditEmployeeGUI extends JFrame
       wagesPanel.add(wagesLabel);
       wagesPanel.add(wages);
       
-      editPanel = new JPanel();
-      editPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
-      space = new JLabel("  ");
-      edit = new JButton("EDIT");
-      edit.setPreferredSize(new Dimension(80,30));
-      edit.addActionListener(new Close());
-      delete = new JButton("DELETE");
-      delete.setPreferredSize(new Dimension(80,30));
-      delete.addActionListener(new Delete());
-      editPanel.add(space);
-      editPanel.add(edit);
-      editPanel.add(delete);
+      passwordPanel = new JPanel();
+      passwordPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
+      passwordLabel = new JLabel("Password   ");
+      password = new JTextField(10);
+      passwordPanel.add(passwordLabel);
+      passwordPanel.add(password);
+      
+      addPanel = new JPanel();
+      add = new JButton("ADD");
+      add.setPreferredSize(new Dimension(80,30));
+      add.addActionListener(new Add());
+      addPanel.add(add);
       
       main.add(cprPanel);
       main.add(usernamePanel);
       main.add(namePanel);
+      main.add(birthdayPanel);
       main.add(emailPanel);
       main.add(departmentPanel);
       main.add(positionPanel);
       main.add(wagesPanel);
-      main.add(editPanel);
+      main.add(passwordPanel);
+      main.add(addPanel);
       
       
       panel.add(main);
       
       add(panel);
-      setSize(230,290);
+      setSize(230,350);
       setVisible(true);
       setLocationRelativeTo(null);
       setResizable(false);
    }
    
-   public class Close implements ActionListener
+   public class Add implements ActionListener
    {
       public void actionPerformed(ActionEvent e)
       {
+         Employee emp = new Employee();
+         String cprText = cpr.getText();
+         emp.setCpr(cprText);
+         String usernameText = username.getText();
+         emp.setUserName(usernameText);
+         String nameText = name.getText();
+         emp.setName(nameText);
+         int dayText = Integer.parseInt(day.getText());
+         emp.setBirthDate(dayText);
+         int monthText = Integer.parseInt(month.getText());
+         emp.setBirthMonth(monthText);
+         int yearText = Integer.parseInt(year.getText());
+         emp.setBirthYear(yearText);
+         String emailText = email.getText();
+         emp.setEmail(emailText);
+         String departmentText = department.getText();
+         emp.setDepartment(departmentText);
+         String roleText = position.getText();
+         emp.setRole(roleText);
+         String wagesText = wages.getText();
+         emp.setWages(Integer.parseInt(wagesText));
+         String passwordL = password.getText();
+         emp.setPassword(passwordL);
+         
+         controller.addEmployee(emp);
+         
+         JOptionPane j = new JOptionPane();
+         
+         j.showMessageDialog(null, "You succesfully added a new employee", "Information", JOptionPane.INFORMATION_MESSAGE);
+         
          dispose();
       }
-   }
-   
-   public class Delete implements ActionListener
-   {
-      public void actionPerformed(ActionEvent e)
-      {
-         dispose();
-      }
-   }
-   
-   public static void main(String[] args)
-   {
-      EditEmployeeGUI addEmployee = new EditEmployeeGUI();
    }
 
 }

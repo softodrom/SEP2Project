@@ -1,8 +1,7 @@
-package gui;
+package GUI;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -12,12 +11,11 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JPasswordField;
+import javax.swing.JScrollPane;
 import javax.swing.JTable;
-import javax.swing.JTextField;
 
 
-public class EventsGUI extends JFrame
+public class Events extends JFrame
 {
    private JPanel north;
    private JPanel center;
@@ -25,8 +23,6 @@ public class EventsGUI extends JFrame
    
    private JPanel mainLeft;
    private JPanel mainCenter;
-   private JPanel mainRight;
-   
    private ImageIcon icon;
    private JLabel iconLabel;
    
@@ -36,15 +32,18 @@ public class EventsGUI extends JFrame
    private JPanel addEventPanel;
    private JPanel editEventPanel;
    private JPanel searchEventPanel;
+   private JPanel viewParticipantsPanel;
    
    private JButton addEvent;
    private JButton editEvent;
    private JButton searchEvent;
    private JPanel backPanel;
    private JButton back;
+   private JButton viewParticipants;
    
+   private Controller controller;
    
-   public EventsGUI()
+   public Events(Controller controller)
    {
       super("WGYM BANK");
       
@@ -67,6 +66,12 @@ public class EventsGUI extends JFrame
       addEvent.setPreferredSize(new Dimension(250,50));
       addEventPanel.add(addEvent);
       
+      viewParticipantsPanel = new JPanel();
+      viewParticipants = new JButton("View participants");
+      viewParticipants.setPreferredSize(new Dimension(250,50));
+      viewParticipants.addActionListener(new ViewParticipantsList());
+      viewParticipantsPanel.add(viewParticipants);
+      
       editEventPanel = new JPanel();
       editEvent = new JButton("Edit an event");
       editEvent.addActionListener(new EditEvents());
@@ -80,6 +85,7 @@ public class EventsGUI extends JFrame
       searchEventPanel.add(searchEvent);
       
       mainLeft.add(addEventPanel);
+      mainLeft.add(viewParticipantsPanel);
       mainLeft.add(editEventPanel);
       mainLeft.add(searchEventPanel);
       
@@ -87,8 +93,13 @@ public class EventsGUI extends JFrame
       mainCenter = new JPanel();
       
       tablePanel = new JPanel();
-      table = new JTable(20,7);
-      tablePanel.add(table);
+      String[] columnNames = {"Name","Department","Start Date","Start Time","End Date", "End Time"};
+      Object[][] data = {{"Salary Day","Money","31/05","10:00","31/05","22:00"}};
+      table = new JTable(data,columnNames);
+      table.setPreferredScrollableViewportSize(new Dimension(600,310));
+      table.setFillsViewportHeight(true);
+      JScrollPane scrollPane = new JScrollPane(table);
+      tablePanel.add(scrollPane);
       
       mainCenter.add(tablePanel);
       
@@ -122,7 +133,15 @@ public class EventsGUI extends JFrame
    {
       public void actionPerformed(ActionEvent e)
       {
-         AddEventGUI addEvent = new AddEventGUI();
+         AddEvent addEvent = new AddEvent();
+      }
+   }
+   
+   public class ViewParticipantsList implements ActionListener
+   {
+      public void actionPerformed(ActionEvent e)
+      {
+         ViewParticipants a = new ViewParticipants();
       }
    }
    
@@ -130,7 +149,7 @@ public class EventsGUI extends JFrame
    {
       public void actionPerformed(ActionEvent e)
       {
-         EditEventGUI editEvent = new EditEventGUI();
+         EditEvent editEvent = new EditEvent();
       }
    }
    
@@ -138,7 +157,7 @@ public class EventsGUI extends JFrame
    {
       public void actionPerformed(ActionEvent e)
       {
-         SearchEventGUI editEvent = new SearchEventGUI();
+         SearchEvent editEvent = new SearchEvent();
       }
    }
    
@@ -146,14 +165,9 @@ public class EventsGUI extends JFrame
    {
       public void actionPerformed(ActionEvent e)
       {
-         WelcomeGUI welcome = new WelcomeGUI();
+         Welcome welcome = new Welcome(controller);
          dispose();
       }
-   }
-   
-   public static void main(String[] args)
-   {
-      EventsGUI eventPage = new EventsGUI();
    }
 
 }

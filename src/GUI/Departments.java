@@ -1,4 +1,4 @@
-package gui;
+package GUI;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
@@ -13,11 +13,12 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
+import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 
 
-public class DepartmentsGUI extends JFrame
+public class Departments extends JFrame
 {
    private JPanel north;
    private JPanel center;
@@ -25,8 +26,6 @@ public class DepartmentsGUI extends JFrame
    
    private JPanel mainLeft;
    private JPanel mainCenter;
-   private JPanel mainRight;
-   
    private ImageIcon icon;
    private JLabel iconLabel;
    
@@ -41,8 +40,9 @@ public class DepartmentsGUI extends JFrame
    private JPanel backPanel;
    private JButton back;
    
+   private Controller controller;
    
-   public DepartmentsGUI()
+   public Departments(Controller controller)
    {
       super("WGYM BANK");
       
@@ -78,8 +78,13 @@ public class DepartmentsGUI extends JFrame
       mainCenter = new JPanel();
       
       tablePanel = new JPanel();
-      table = new JTable(20,7);
-      tablePanel.add(table);
+      String[] columnNames = {"Nr","Name","Capacity","City","Country"};
+      Object[][] data = {{"1","Money","100","Horsens","Denmark"}};
+      table = new JTable(data, columnNames);
+      table.setPreferredScrollableViewportSize(new Dimension(600,220));
+      table.setFillsViewportHeight(true);
+      JScrollPane scrollPane = new JScrollPane(table);
+      tablePanel.add(scrollPane);
       
       mainCenter.add(tablePanel);
       
@@ -95,10 +100,6 @@ public class DepartmentsGUI extends JFrame
       backPanel.add(back);
       south.add(backPanel);
       
-      
-      
-      
-      
       add(north, BorderLayout.NORTH);
       add(center, BorderLayout.CENTER);
       add(south, BorderLayout.SOUTH);
@@ -113,7 +114,7 @@ public class DepartmentsGUI extends JFrame
    {
       public void actionPerformed(ActionEvent e)
       {
-         AddDepartmentGUI addDepartment = new AddDepartmentGUI();
+         AddDepartment addDepartment = new AddDepartment();
       }
    }
    
@@ -121,7 +122,7 @@ public class DepartmentsGUI extends JFrame
    {
       public void actionPerformed(ActionEvent e)
       {
-         EditDepartmentGUI editDepartment = new EditDepartmentGUI();
+         EditDepartment editDepartment = new EditDepartment();
       }
    }
    
@@ -129,14 +130,9 @@ public class DepartmentsGUI extends JFrame
    {
       public void actionPerformed(ActionEvent e)
       {
-         WelcomeGUI welcome = new WelcomeGUI();
+         Welcome welcome = new Welcome(controller);
          dispose();
       }
-   }
-   
-   public static void main(String[] args)
-   {
-      DepartmentsGUI departmentPage = new DepartmentsGUI();
    }
 
 }

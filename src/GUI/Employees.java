@@ -1,7 +1,8 @@
-package gui;
+package GUI;
+
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -12,11 +13,15 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
+import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 
+import program.Department;
+import program.Employee;
 
-public class EmployeesGUI extends JFrame
+
+public class Employees extends JFrame
 {
    private JPanel north;
    private JPanel center;
@@ -24,8 +29,6 @@ public class EmployeesGUI extends JFrame
    
    private JPanel mainLeft;
    private JPanel mainCenter;
-   private JPanel mainRight;
-   
    private ImageIcon icon;
    private JLabel iconLabel;
    
@@ -42,10 +45,19 @@ public class EmployeesGUI extends JFrame
    private JPanel backPanel;
    private JButton back;
    
+   private Controller controller;
+
+   public String toString(int x)
+   {
+      if (x < 10) return "0" + x; else
+         return x + "";
+   }
    
-   public EmployeesGUI()
+   public Employees(Controller controller)
    {
       super("WGYM BANK");
+      
+      this.controller = controller;
       
       //logo
       north = new JPanel();
@@ -84,10 +96,33 @@ public class EmployeesGUI extends JFrame
       
       //mainCenter
       mainCenter = new JPanel();
-      
+      Employee emp = new Employee();
       tablePanel = new JPanel();
-      table = new JTable(20,7);
-      tablePanel.add(table);
+      String[] columnNames = {"CPR","Username","Name","Birthday","Email","Department","Role","Wages"};
+      
+      EmployeeList list = controller.getEmployeesList();
+      
+      String[][] data = new String[list.getSize()][8];
+      
+      for (int i = 0; i < list.getSize(); i++) {
+         
+         data[i][0] = list.getEmployee(i).getCpr();
+         data[i][1] = list.getEmployee(i).getUserName();
+         data[i][2] = list.getEmployee(i).getName();
+         data[i][3] = toString(list.getEmployee(i).getBirthDate()) + "-" + toString(list.getEmployee(i).getBirthMonth()) + "-" + list.getEmployee(i).getBirthYear();
+         data[i][4] = list.getEmployee(i).getEmail();
+         data[i][5] = list.getEmployee(i).getDepartment();
+         data[i][6] = list.getEmployee(i).getRole();
+         data[i][7] = list.getEmployee(i).getWages() + " DKK";
+         
+      }
+      
+      table = new JTable(data,columnNames);
+      table.setPreferredScrollableViewportSize(new Dimension(700,280));
+      table.setFillsViewportHeight(true);
+      JScrollPane scrollPane = new JScrollPane(table);
+      
+      tablePanel.add(scrollPane);
       
       mainCenter.add(tablePanel);
       
@@ -103,10 +138,6 @@ public class EmployeesGUI extends JFrame
       backPanel.add(back);
       south.add(backPanel);
       
-      
-      
-      
-      
       add(north, BorderLayout.NORTH);
       add(center, BorderLayout.CENTER);
       add(south, BorderLayout.SOUTH);
@@ -121,7 +152,7 @@ public class EmployeesGUI extends JFrame
    {
       public void actionPerformed(ActionEvent e)
       {
-         AddEmployeeGUI addEmployee = new AddEmployeeGUI();
+         AddEmployee addEmployee = new AddEmployee(controller);
       }
    }
    
@@ -129,7 +160,7 @@ public class EmployeesGUI extends JFrame
    {
       public void actionPerformed(ActionEvent e)
       {
-         EditEmployeeGUI editEmployee = new EditEmployeeGUI();
+         EditEmployee editEmployee = new EditEmployee();
       }
    }
    
@@ -145,14 +176,9 @@ public class EmployeesGUI extends JFrame
    {
       public void actionPerformed(ActionEvent e)
       {
-         WelcomeGUI welcome = new WelcomeGUI();
+         Welcome welcome = new Welcome(controller);
          dispose();
       }
-   }
-   
-   public static void main(String[] args)
-   {
-      EmployeesGUI employeePage = new EmployeesGUI();
    }
 
 }

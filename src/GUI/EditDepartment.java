@@ -1,5 +1,5 @@
-package gui;
-import java.awt.BorderLayout;
+package GUI;
+
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
@@ -12,8 +12,10 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import program.Department;
 
-public class EditDepartmentGUI extends JFrame
+
+public class EditDepartment extends JFrame
 {
    private JPanel panel;
    private JPanel depInfo;
@@ -36,7 +38,7 @@ public class EditDepartmentGUI extends JFrame
    private JButton edit;
    private JButton delete;
    
-   public EditDepartmentGUI()
+   public EditDepartment()
    {
       super("Edit a department");
       
@@ -84,9 +86,9 @@ public class EditDepartmentGUI extends JFrame
       editPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
       edit = new JButton("EDIT");
       edit.setPreferredSize(new Dimension(80,30));
-      edit.addActionListener(new Close());
+      edit.addActionListener(new Edit());
       delete = new JButton("DELETE");
-      delete.addActionListener(new Close1());
+      delete.addActionListener(new Delete());
       delete.setPreferredSize(new Dimension(80,30));
       editPanel.add(edit);
       editPanel.add(delete);
@@ -107,15 +109,24 @@ public class EditDepartmentGUI extends JFrame
       setResizable(false);
    }
    
-   public class Close implements ActionListener
+   public class Edit implements ActionListener
    {
       public void actionPerformed(ActionEvent e)
       {
+         Department dep = new Department(Integer.parseInt(capacity.getText()));
+         int nrText = Integer.parseInt(nr.getText());
+         dep.setDepNumber(nrText);
+         String nameText = name.getText();
+         dep.setDepName(nameText);
+         String cityText = city.getText();
+         dep.setDepCity(cityText);
+         String countryText = country.getText();
+         dep.setDepCountry(countryText);
          dispose();
       }
    }
    
-   public class Close1 implements ActionListener
+   public class Delete implements ActionListener
    {
       public void actionPerformed(ActionEvent e)
       {
@@ -125,7 +136,7 @@ public class EditDepartmentGUI extends JFrame
    
    public static void main(String[] args)
    {
-      EditDepartmentGUI addDepartment = new EditDepartmentGUI();
+      EditDepartment addDepartment = new EditDepartment();
    }
 
 }
